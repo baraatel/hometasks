@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as KioskRouteImport } from './routes/kiosk'
+import { Route as ManageRouteImport } from './routes/manage'
 import { Route as WeekRouteImport } from './routes/week'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const KioskRoute = KioskRouteImport.update({
   path: '/kiosk',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ManageRoute = ManageRouteImport.update({
+  id: '/manage',
+  path: '/manage',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WeekRoute = WeekRouteImport.update({
   id: '/week',
   path: '/week',
@@ -32,30 +38,34 @@ const WeekRoute = WeekRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/kiosk': typeof KioskRoute
+  '/manage': typeof ManageRoute
   '/week': typeof WeekRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/kiosk': typeof KioskRoute
+  '/manage': typeof ManageRoute
   '/week': typeof WeekRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/kiosk': typeof KioskRoute
+  '/manage': typeof ManageRoute
   '/week': typeof WeekRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/kiosk' | '/week'
+  fullPaths: '/' | '/kiosk' | '/manage' | '/week'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/kiosk' | '/week'
-  id: '__root__' | '/' | '/kiosk' | '/week'
+  to: '/' | '/kiosk' | '/manage' | '/week'
+  id: '__root__' | '/' | '/kiosk' | '/manage' | '/week'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   KioskRoute: typeof KioskRoute
+  ManageRoute: typeof ManageRoute
   WeekRoute: typeof WeekRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof KioskRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/manage': {
+      id: '/manage'
+      path: '/manage'
+      fullPath: '/manage'
+      preLoaderRoute: typeof ManageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/week': {
       id: '/week'
       path: '/week'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   KioskRoute: KioskRoute,
+  ManageRoute: ManageRoute,
   WeekRoute: WeekRoute,
 }
 export const routeTree = rootRouteImport
