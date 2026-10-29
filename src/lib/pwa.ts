@@ -4,7 +4,7 @@ function isRefusedContext(): boolean {
   if (window.self !== window.top) return true;
   const h = window.location.hostname.toLowerCase();
   const first = h.split(".")[0];
-  const previewLabel = /^(?:id-preview|preview)(?:-[a-z0-9]+)?--.+$/.test(first);
+  const previewLabel = /^(?:id-preview|preview)(?:-[a-z0-9]+)?--.+$/.test(first ?? "");
   if (previewLabel && /\.(lovable\.app|gpt-eng\.com|gptengineer\.run)$/.test(h)) return true;
   if (/^project--[^.]+-dev\.(lovable\.app|gpt-eng\.com|gptengineer\.run)$/.test(h)) return true;
   if (h === "lovableproject.com" || h.endsWith(".lovableproject.com")) return true;
