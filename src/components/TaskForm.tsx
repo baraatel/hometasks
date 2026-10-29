@@ -56,7 +56,7 @@ export function TaskForm({ task, nextOrder, onClose }: { task: Task | null; next
                   className={cn("emoji rounded-lg p-1 text-2xl", emoji === e && "bg-primary/15 ring-2 ring-primary")}>{e}</button>
               ))}
             </div>
-            <input value={emoji} onChange={(e) => setEmoji(e.target.value)} className={cn(field, "mt-2 w-20 text-center")} maxLength={4} />
+            <input value={emoji} onChange={(e) => setEmoji(e.target.value)} className={cn(field, "mt-2 w-20 text-center")} maxLength={8} />
           </div>
           <label className="block"><span className="text-sm font-bold">{t.titleEn}</span>
             <input dir="ltr" value={title} onChange={(e) => setTitle(e.target.value)} className={field} /></label>
