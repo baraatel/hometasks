@@ -15,13 +15,13 @@ export function TaskCard({
       aria-pressed={done}
       className={cn(
         "flex w-full items-center gap-4 rounded-2xl text-start transition active:scale-[0.98]",
-        xl ? "min-h-28 bg-kiosk-card p-5 text-kiosk-foreground" : "min-h-20 bg-card p-4 shadow-card",
+        xl ? "min-h-28 bg-kiosk-card p-5 text-kiosk-foreground" : "min-h-20 bg-card p-4 shadow-card md:min-h-28 md:p-5",
         done && "opacity-40",
       )}
     >
-      <span className={cn("emoji shrink-0", xl ? "text-6xl" : "text-4xl")}>{task.emoji}</span>
+      <span className={cn("emoji shrink-0", xl ? "text-6xl" : "text-4xl md:text-6xl")}>{task.emoji}</span>
       <span className="min-w-0 flex-1">
-        <span className={cn("block font-bold leading-tight", xl ? "text-3xl" : "text-xl", done && "line-through")}>
+        <span className={cn("block font-bold leading-tight", xl ? "text-3xl" : "text-xl md:text-2xl", done && "line-through")}>
           {taskTitle(task, lang)}
         </span>
         {time && (
@@ -34,11 +34,11 @@ export function TaskCard({
       <span
         className={cn(
           "flex shrink-0 items-center justify-center rounded-full border-4 transition",
-          xl ? "h-16 w-16" : "h-12 w-12",
+          xl ? "h-16 w-16" : "h-12 w-12 md:h-16 md:w-16",
           done ? "border-success bg-success text-success-foreground" : "border-border",
         )}
       >
-        {done && <Check className={xl ? "h-9 w-9" : "h-7 w-7"} strokeWidth={3.5} />}
+        {done && <Check className={xl ? "h-9 w-9" : "h-7 w-7 md:h-9 md:w-9"} strokeWidth={3.5} />}
       </span>
     </button>
   );
