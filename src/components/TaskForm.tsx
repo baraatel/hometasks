@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { TaskCard } from "@/components/TaskCard";
-import { supabase } from "@/integrations/supabase/client";
+import { adminAction } from "@/lib/admin.functions";
 import { useI18n } from "@/lib/i18n";
 import { dateKey, type RecurrenceType } from "@/lib/schedule";
 import type { Task } from "@/lib/tasks";
@@ -38,14 +38,15 @@ export function TaskForm({ task, nextOrder, onClose }: { task: Task | null; next
   const save = async () => {
     if (!payload.title || (type === "weekly" && days.length === 0)) return;
     setBusy(true);
-    if (task) await supabase.from("tasks").update(payload).eq("id", task.id);
-    else await supabase.from("tasks").insert({ ...payload, sort_order: nextOrder });
+    const pin = sessionStorage.getItem("ht-pin") ?? "";
+    if (task) await adminAction({ data: { action: "update", pin, id: task.id, task: payload } });
+    else await adminAction({ data: { action: "create", pin, task: payload, sort_order: nextOrder } });
     onClose();
   };
   const remove = async () => {
     if (!task) return;
     setBusy(true);
-    await supabase.from("tasks").delete().eq("id", task.id);
+    await adminAction({ data: { action: "delete", pin: sessionStorage.getItem("ht-pin") ?? "", id: task.id } });
     onClose();
   };
 
