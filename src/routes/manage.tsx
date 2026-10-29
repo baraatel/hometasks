@@ -73,7 +73,7 @@ function Admin({ onLock }: { onLock: () => void }) {
     const j = i + dir;
     if (j < 0 || j >= tasks.length) return;
     const list = [...tasks];
-    [list[i], list[j]] = [list[j], list[i]];
+    [list[i], list[j]] = [list[j]!, list[i]!];
     await Promise.all(list.map((x, idx) => supabase.from("tasks").update({ sort_order: idx }).eq("id", x.id)));
     reload();
   };
