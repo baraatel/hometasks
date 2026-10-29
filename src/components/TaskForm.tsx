@@ -19,7 +19,7 @@ const EMOJI_GROUPS = [
 ];
 
 export function TaskForm({ task, nextOrder, onClose }: { task: Task | null; nextOrder: number; onClose: () => void }) {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [emoji, setEmoji] = useState(task?.emoji ?? "🧹");
   const [title, setTitle] = useState(task?.title ?? "");
   const [titleAr, setTitleAr] = useState(task?.title_ar ?? "");
