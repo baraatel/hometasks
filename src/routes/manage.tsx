@@ -4,9 +4,8 @@ import { ArrowDown, ArrowUp, Lock, Pencil, Plus } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { TaskForm } from "@/components/TaskForm";
 import { useHousehold, useToday, taskTitle, fmtTime, type Task } from "@/lib/tasks";
-import { ADMIN_PIN } from "@/lib/schedule";
+import { adminAction } from "@/lib/admin.functions";
 import { useI18n } from "@/lib/i18n";
-import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/manage")({
   head: () => ({
@@ -23,16 +22,16 @@ export const Route = createFileRoute("/manage")({
 function Manage() {
   const { t } = useI18n();
   const [unlocked, setUnlocked] = useState(false);
-  useEffect(() => { setUnlocked(sessionStorage.getItem("ht-admin") === "1"); }, []);
+  useEffect(() => { setUnlocked(!!sessionStorage.getItem("ht-pin")); }, []);
   return (
     <AppShell>
-      {unlocked ? <Admin onLock={() => { sessionStorage.removeItem("ht-admin"); setUnlocked(false); }} />
-        : <PinPad onOk={() => { sessionStorage.setItem("ht-admin", "1"); setUnlocked(true); }} label={t.enterPin} />}
+      {unlocked ? <Admin onLock={() => { sessionStorage.removeItem("ht-pin"); setUnlocked(false); }} />
+        : <PinPad onOk={(p) => { sessionStorage.setItem("ht-pin", p); setUnlocked(true); }} label={t.enterPin} />}
     </AppShell>
   );
 }
 
-function PinPad({ onOk, label }: { onOk: () => void; label: string }) {
+function PinPad({ onOk, label }: { onOk: (pin: string) => void; label: string }) {
   const { t } = useI18n();
   const [pin, setPin] = useState("");
   const [err, setErr] = useState(false);
@@ -40,7 +39,9 @@ function PinPad({ onOk, label }: { onOk: () => void; label: string }) {
     const next = (pin + d).slice(0, 4);
     setPin(next); setErr(false);
     if (next.length === 4) {
-      if (next === ADMIN_PIN) onOk(); else { setErr(true); setTimeout(() => setPin(""), 400); }
+      adminAction({ data: { action: "verify", pin: next } }).then((r) => {
+        if (r.ok) onOk(next); else { setErr(true); setTimeout(() => setPin(""), 400); }
+      });
     }
   };
   return (
@@ -74,7 +75,7 @@ function Admin({ onLock }: { onLock: () => void }) {
     if (j < 0 || j >= tasks.length) return;
     const list = [...tasks];
     [list[i], list[j]] = [list[j]!, list[i]!];
-    await Promise.all(list.map((x, idx) => supabase.from("tasks").update({ sort_order: idx }).eq("id", x.id)));
+    await adminAction({ data: { action: "reorder", pin: sessionStorage.getItem("ht-pin") ?? "", ids: list.map((x) => x.id) } });
     reload();
   };
 

@@ -20,5 +20,3 @@ export function isDueOn(task: TaskLike, d: Date): boolean {
   if (task.recurrence_type === "once") return task.once_date === dateKey(d);
   return false;
 }
-
-export const ADMIN_PIN = "1234";
