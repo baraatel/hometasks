@@ -7,7 +7,16 @@ import { dateKey, type RecurrenceType } from "@/lib/schedule";
 import type { Task } from "@/lib/tasks";
 import { cn } from "@/lib/utils";
 
-const EMOJIS = ["🧺", "🧹", "🚿", "🪴", "🍽️", "🛏️", "🧽", "🗑️", "👕", "🧴", "🪟", "🛒", "🍳", "👶", "🐶", "🚗", "🧸", "🪣", "🧼", "📋"];
+const EMOJI_GROUPS = [
+  { en: "Cleaning", ar: "التنظيف", items: ["🧹", "🧽", "🪣", "🧼", "🫧", "🧴", "🪟", "🚪", "🛋️", "🪑", "🧯", "✨", "🗑️", "♻️", "🪠", "🕸️"] },
+  { en: "Laundry", ar: "الغسيل", items: ["🧺", "👕", "👖", "👗", "🧦", "🧥", "👔", "🩳", "🧣", "🛏️", "🪡", "🧷", "👟", "🥾"] },
+  { en: "Kitchen", ar: "المطبخ", items: ["🍽️", "🍳", "🥘", "🍲", "🥗", "🥪", "🍞", "🥛", "☕", "🫖", "🔪", "🥄", "🧊", "🥡", "🍱", "🧂"] },
+  { en: "Bathroom", ar: "الحمام", items: ["🚿", "🛁", "🚽", "🧻", "🪥", "🪒", "🧴", "🪞"] },
+  { en: "Shopping", ar: "التسوق", items: ["🛒", "🛍️", "🥦", "🍎", "🥚", "🧃", "💊", "🧾"] },
+  { en: "Garden & outdoor", ar: "الحديقة", items: ["🪴", "🌱", "🌿", "🌷", "🌳", "💧", "🚿", "🍂", "☀️", "🏡"] },
+  { en: "Kids & pets", ar: "الأطفال والحيوانات", items: ["👶", "🍼", "🧸", "🎒", "📚", "🛝", "🐶", "🐱", "🐟", "🦴", "🐾"] },
+  { en: "Errands & other", ar: "مهام أخرى", items: ["🚗", "⛽", "📦", "📬", "💡", "🔧", "🔋", "🧰", "📋", "⏰", "📞", "💰", "🙏", "⭐", "❤️", "✅"] },
+];
 
 export function TaskForm({ task, nextOrder, onClose }: { task: Task | null; nextOrder: number; onClose: () => void }) {
   const { t } = useI18n();
@@ -50,10 +59,17 @@ export function TaskForm({ task, nextOrder, onClose }: { task: Task | null; next
         <div className="space-y-4">
           <div>
             <p className="mb-2 text-sm font-bold">{t.emoji}</p>
-            <div className="grid grid-cols-10 gap-1">
-              {EMOJIS.map((e) => (
-                <button key={e} onClick={() => setEmoji(e)}
-                  className={cn("emoji rounded-lg p-1 text-2xl", emoji === e && "bg-primary/15 ring-2 ring-primary")}>{e}</button>
+            <div className="max-h-56 space-y-2 overflow-y-auto rounded-xl border p-2">
+              {EMOJI_GROUPS.map((g) => (
+                <div key={g.en}>
+                  <p className="mb-1 text-xs font-bold text-muted-foreground">{lang === "ar" ? g.ar : g.en}</p>
+                  <div className="grid grid-cols-8 gap-1 sm:grid-cols-10">
+                    {g.items.map((e) => (
+                      <button key={e} type="button" onClick={() => setEmoji(e)}
+                        className={cn("emoji flex aspect-square items-center justify-center rounded-lg text-2xl hover:bg-secondary", emoji === e && "bg-primary/15 ring-2 ring-primary")}>{e}</button>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
             <input value={emoji} onChange={(e) => setEmoji(e.target.value)} className={cn(field, "mt-2 w-20 text-center")} maxLength={8} />
