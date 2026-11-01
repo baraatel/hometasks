@@ -1,0 +1,8 @@
+{
+  "nav": { "today": "আজ", "week": "সপ্তাহ", "manage": "পরিচালনা", "language": "ভাষা" },
+  "actions": { "save": "সংরক্ষণ", "cancel": "বাতিল", "delete": "মুছুন", "edit": "সম্পাদনা", "submit": "জমা দিন", "addTask": "কাজ যোগ করুন", "editTask": "কাজ সম্পাদনা", "unlock": "খুলুন", "lock": "লক করুন", "autoTranslate": "সব ভাষায় স্বয়ংক্রিয় অনুবাদ", "translating": "অনুবাদ হচ্ছে…" },
+  "status": { "pending": "বাকি", "inProgress": "চলছে", "completed": "সম্পন্ন", "done": "সম্পন্ন", "of": "এর মধ্যে", "allDone": "আজকের সব কাজ শেষ! 🎉", "nothingToday": "আজ কোনো কাজ নেই", "tasksCount": "কাজ" },
+  "schedule": { "daily": "প্রতিদিন", "weekly": "সাপ্তাহিক", "once": "একবার", "everyDay": "প্রতিদিন", "repeat": "পুনরাবৃত্তি", "days": "দিন", "date": "তারিখ", "time": "সময় (ঐচ্ছিক)", "dayNames": ["রবি", "সোম", "মঙ্গল", "বুধ", "বৃহঃ", "শুক্র", "শনি"] },
+  "form": { "emoji": "প্রতীক", "title": "কাজের নাম", "description": "নোট (ঐচ্ছিক)", "baseLang": "লেখার ভাষা", "translations": "অনুবাদ", "reviewHint": "প্রতিটি ভাষার শব্দ দেখে নিন এবং দরকার হলে বদলান।", "preview": "প্রিভিউ", "fallbackHint": "খালি ভাষায় মূল লেখাটি দেখাবে।" },
+  "errors": { "enterPin": "কাজ পরিচালনা করতে PIN দিন", "wrongPin": "ভুল PIN", "required": "কাজের নাম লিখুন", "pickDay": "অন্তত একটি দিন বেছে নিন", "translateFailed": "এখন অনুবাদ করা গেল না। একটু পরে আবার চেষ্টা করুন।", "saveFailed": "কাজ সংরক্ষণ করা গেল না" }
+}

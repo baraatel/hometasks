@@ -1,0 +1,8 @@
+{
+  "nav": { "today": "آج", "week": "ہفتہ", "manage": "انتظام", "language": "زبان" },
+  "actions": { "save": "محفوظ کریں", "cancel": "منسوخ", "delete": "حذف کریں", "edit": "ترمیم", "submit": "جمع کریں", "addTask": "کام شامل کریں", "editTask": "کام میں ترمیم", "unlock": "کھولیں", "lock": "لاک کریں", "autoTranslate": "تمام زبانوں میں خودکار ترجمہ", "translating": "ترجمہ ہو رہا ہے…" },
+  "status": { "pending": "باقی", "inProgress": "جاری", "completed": "مکمل", "done": "مکمل", "of": "میں سے", "allDone": "آج کے سب کام مکمل! 🎉", "nothingToday": "آج کوئی کام نہیں", "tasksCount": "کام" },
+  "schedule": { "daily": "روزانہ", "weekly": "ہفتہ وار", "once": "ایک بار", "everyDay": "ہر روز", "repeat": "دہرائیں", "days": "دن", "date": "تاریخ", "time": "وقت (اختیاری)", "dayNames": ["اتوار", "پیر", "منگل", "بدھ", "جمعرات", "جمعہ", "ہفتہ"] },
+  "form": { "emoji": "نشان", "title": "کام کا نام", "description": "نوٹ (اختیاری)", "baseLang": "لکھی گئی زبان", "translations": "ترجمے", "reviewHint": "ہر زبان کے الفاظ دیکھیں اور ضرورت ہو تو بدلیں۔", "preview": "جھلک", "fallbackHint": "خالی زبانوں میں اصل متن دکھایا جائے گا۔" },
+  "errors": { "enterPin": "کام سنبھالنے کے لیے PIN درج کریں", "wrongPin": "غلط PIN", "required": "کام کا نام لکھیں", "pickDay": "کم از کم ایک دن چنیں", "translateFailed": "ابھی ترجمہ نہیں ہو سکا۔ تھوڑی دیر بعد دوبارہ کوشش کریں۔", "saveFailed": "کام محفوظ نہیں ہو سکا" }
+}

@@ -1,0 +1,8 @@
+{
+  "nav": { "today": "आज", "week": "सप्ताह", "manage": "प्रबंधन", "language": "भाषा" },
+  "actions": { "save": "सहेजें", "cancel": "रद्द करें", "delete": "हटाएँ", "edit": "बदलें", "submit": "भेजें", "addTask": "काम जोड़ें", "editTask": "काम बदलें", "unlock": "खोलें", "lock": "लॉक करें", "autoTranslate": "सभी भाषाओं में अपने-आप अनुवाद", "translating": "अनुवाद हो रहा है…" },
+  "status": { "pending": "बाकी", "inProgress": "चल रहा है", "completed": "हो गया", "done": "पूरे", "of": "में से", "allDone": "आज के सारे काम हो गए! 🎉", "nothingToday": "आज कोई काम नहीं है", "tasksCount": "काम" },
+  "schedule": { "daily": "रोज़", "weekly": "साप्ताहिक", "once": "एक बार", "everyDay": "हर दिन", "repeat": "दोहराना", "days": "दिन", "date": "तारीख", "time": "समय (वैकल्पिक)", "dayNames": ["रवि", "सोम", "मंगल", "बुध", "गुरु", "शुक्र", "शनि"] },
+  "form": { "emoji": "चिह्न", "title": "काम का नाम", "description": "नोट (वैकल्पिक)", "baseLang": "लिखी गई भाषा", "translations": "अनुवाद", "reviewHint": "हर भाषा का शब्द जाँचें और ज़रूरत हो तो बदलें।", "preview": "झलक", "fallbackHint": "खाली भाषाओं में मूल लिखा हुआ दिखेगा।" },
+  "errors": { "enterPin": "काम संभालने के लिए PIN डालें", "wrongPin": "गलत PIN", "required": "काम का नाम लिखें", "pickDay": "कम से कम एक दिन चुनें", "translateFailed": "अभी अनुवाद नहीं हो पाया। थोड़ी देर में फिर कोशिश करें।", "saveFailed": "काम सहेजा नहीं जा सका" }
+}
