@@ -40,5 +40,5 @@ export function flatDict(l: Lang) {
 /** Pick a user-generated text for the viewer's language, falling back to the original. */
 export function pickText(map: unknown, lang: Lang, base: string, fallback = "") {
   const m = (map && typeof map === "object" ? map : {}) as Record<string, string>;
-  return m[lang]?.trim() || m[base]?.trim() || m.en?.trim() || Object.values(m).find((v) => v?.trim()) || fallback;
+  return m[lang]?.trim() || m[base]?.trim() || m["en"]?.trim() || Object.values(m).find((v) => v?.trim()) || fallback;
 }
