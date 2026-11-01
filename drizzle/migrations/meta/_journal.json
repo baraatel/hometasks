@@ -15,6 +15,13 @@
       "when": 1793294444309,
       "tag": "0001_restrict_household_access",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793553006823,
+      "tag": "0002_multilingual_tasks",
+      "breakpoints": true
     }
   ]
 }
