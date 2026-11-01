@@ -31,6 +31,8 @@ export function TaskForm({ task, nextOrder, onClose }: { task: Task | null; next
 
   const payload = {
     emoji, title: title.trim(), title_ar: titleAr.trim() || null, recurrence_type: type,
+    base_lang: "en", description_i18n: {} as Record<string, string>,
+    title_i18n: { ...((task?.title_i18n as Record<string, string>) ?? {}), en: title.trim(), ...(titleAr.trim() ? { ar: titleAr.trim() } : {}) },
     recurrence_days: type === "weekly" ? [...days].sort() : [],
     once_date: type === "once" ? onceDate : null, scheduled_time: time || null,
   };
@@ -75,9 +77,9 @@ export function TaskForm({ task, nextOrder, onClose }: { task: Task | null; next
             </div>
             <input value={emoji} onChange={(e) => setEmoji(e.target.value)} className={cn(field, "mt-2 w-20 text-center")} maxLength={8} />
           </div>
-          <label className="block"><span className="text-sm font-bold">{t.titleEn}</span>
+          <label className="block"><span className="text-sm font-bold">{t.title} (English)</span>
             <input dir="ltr" value={title} onChange={(e) => setTitle(e.target.value)} className={field} /></label>
-          <label className="block"><span className="text-sm font-bold">{t.titleAr}</span>
+          <label className="block"><span className="text-sm font-bold">{t.title} (العربية)</span>
             <input dir="rtl" value={titleAr} onChange={(e) => setTitleAr(e.target.value)} className={field} /></label>
           <div>
             <p className="mb-2 text-sm font-bold">{t.repeat}</p>
