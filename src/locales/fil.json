@@ -1,0 +1,8 @@
+{
+  "nav": { "today": "Ngayon", "week": "Linggo", "manage": "Pamahalaan", "language": "Wika" },
+  "actions": { "save": "I-save", "cancel": "Kanselahin", "delete": "Burahin", "edit": "I-edit", "submit": "Ipasa", "addTask": "Magdagdag ng gawain", "editTask": "I-edit ang gawain", "unlock": "Buksan", "lock": "I-lock", "autoTranslate": "Awtomatikong isalin sa lahat ng wika", "translating": "Isinasalin…" },
+  "status": { "pending": "Gagawin pa", "inProgress": "Ginagawa", "completed": "Tapos na", "done": "tapos", "of": "sa", "allDone": "Tapos na lahat ng gawain ngayon! 🎉", "nothingToday": "Walang gawain ngayong araw", "tasksCount": "gawain" },
+  "schedule": { "daily": "Araw-araw", "weekly": "Lingguhan", "once": "Isang beses", "everyDay": "Araw-araw", "repeat": "Inuulit", "days": "Mga araw", "date": "Petsa", "time": "Oras (opsyonal)", "dayNames": ["Lin", "Lun", "Mar", "Miy", "Huw", "Biy", "Sab"] },
+  "form": { "emoji": "Icon", "title": "Pangalan ng gawain", "description": "Tala (opsyonal)", "baseLang": "Isinulat sa", "translations": "Mga salin", "reviewHint": "Suriin at ayusin ang salita sa bawat wika.", "preview": "Silip", "fallbackHint": "Ang walang laman ay magpapakita ng orihinal na teksto." },
+  "errors": { "enterPin": "Ilagay ang PIN para pamahalaan ang mga gawain", "wrongPin": "Maling PIN", "required": "Ilagay ang pangalan ng gawain", "pickDay": "Pumili ng kahit isang araw", "translateFailed": "Hindi maisalin ngayon. Subukan muli mamaya.", "saveFailed": "Hindi ma-save ang gawain" }
+}

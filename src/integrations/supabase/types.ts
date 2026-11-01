@@ -48,7 +48,9 @@ export type Database = {
       }
       tasks: {
         Row: {
+          base_lang: string
           created_at: string
+          description_i18n: Json
           emoji: string
           id: string
           once_date: string | null
@@ -58,9 +60,12 @@ export type Database = {
           sort_order: number
           title: string
           title_ar: string | null
+          title_i18n: Json
         }
         Insert: {
+          base_lang?: string
           created_at?: string
+          description_i18n?: Json
           emoji?: string
           id?: string
           once_date?: string | null
@@ -70,9 +75,12 @@ export type Database = {
           sort_order?: number
           title: string
           title_ar?: string | null
+          title_i18n?: Json
         }
         Update: {
+          base_lang?: string
           created_at?: string
+          description_i18n?: Json
           emoji?: string
           id?: string
           once_date?: string | null
@@ -82,6 +90,7 @@ export type Database = {
           sort_order?: number
           title?: string
           title_ar?: string | null
+          title_i18n?: Json
         }
         Relationships: []
       }

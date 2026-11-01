@@ -1,0 +1,8 @@
+{
+  "nav": { "today": "اليوم", "week": "الأسبوع", "manage": "الإدارة", "language": "اللغة" },
+  "actions": { "save": "حفظ", "cancel": "إلغاء", "delete": "حذف", "edit": "تعديل", "submit": "إرسال", "addTask": "إضافة مهمة", "editTask": "تعديل المهمة", "unlock": "فتح", "lock": "قفل", "autoTranslate": "ترجمة تلقائية لكل اللغات", "translating": "جارٍ الترجمة…" },
+  "status": { "pending": "لم تُنجز", "inProgress": "قيد التنفيذ", "completed": "منجزة", "done": "منجزة", "of": "من", "allDone": "أُنجزت كل مهام اليوم! 🎉", "nothingToday": "لا توجد مهام لهذا اليوم", "tasksCount": "مهام" },
+  "schedule": { "daily": "يومي", "weekly": "أسبوعي", "once": "مرة واحدة", "everyDay": "كل يوم", "repeat": "التكرار", "days": "الأيام", "date": "التاريخ", "time": "الوقت (اختياري)", "dayNames": ["أحد", "اثنين", "ثلاثاء", "أربعاء", "خميس", "جمعة", "سبت"] },
+  "form": { "emoji": "الرمز", "title": "اسم المهمة", "description": "ملاحظات (اختياري)", "baseLang": "لغة الكتابة", "translations": "الترجمات", "reviewHint": "راجع الصياغة لكل لغة وعدّلها إن لزم.", "preview": "معاينة", "fallbackHint": "اللغات الفارغة تعرض النص الأصلي." },
+  "errors": { "enterPin": "أدخل الرمز لإدارة المهام", "wrongPin": "رمز خاطئ", "required": "اكتب اسم المهمة", "pickDay": "اختر يومًا واحدًا على الأقل", "translateFailed": "تعذّرت الترجمة الآن. حاول بعد قليل.", "saveFailed": "تعذّر حفظ المهمة" }
+}

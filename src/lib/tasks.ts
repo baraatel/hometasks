@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
 import { dateKey } from "./schedule";
+import { langMeta, pickText, type Lang } from "./locales";
 
 export type Task = Tables<"tasks">;
 export type TaskLog = Tables<"task_logs">;
@@ -66,13 +67,18 @@ export function useToday() {
   return now;
 }
 
-export function taskTitle(t: Task, lang: string) {
-  return lang === "ar" && t.title_ar ? t.title_ar : t.title;
+export function taskTitle(t: Task, lang: Lang) {
+  const legacy = lang === "ar" && t.title_ar ? t.title_ar : t.title;
+  return pickText(t.title_i18n, lang, t.base_lang, legacy);
 }
 
-export function fmtTime(time: string | null, lang: string) {
+export function taskDescription(t: Task, lang: Lang) {
+  return pickText(t.description_i18n, lang, t.base_lang, "");
+}
+
+export function fmtTime(time: string | null, lang: Lang) {
   if (!time) return null;
   const [h, m] = time.split(":").map(Number);
   const d = new Date(2000, 0, 1, h, m);
-  return d.toLocaleTimeString(lang === "ar" ? "ar" : "en", { hour: "numeric", minute: "2-digit" });
+  return d.toLocaleTimeString(langMeta(lang).intl, { hour: "numeric", minute: "2-digit" });
 }
