@@ -14,7 +14,12 @@ dist-ssr
 .vinxi
 .tanstack/**
 .nitro
+# Local overrides & private files (keep Lovable's tracked .env intact)
+.env.local
+.env.*.local
 *.local
+ADMIN_CREDENTIALS.md
+package-lock.json
 
 # Wrangler / Cloudflare
 .wrangler/

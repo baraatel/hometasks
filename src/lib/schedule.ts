@@ -1,4 +1,5 @@
 export type RecurrenceType = "daily" | "weekly" | "once";
+export type TimeBucket = "morning" | "afternoon" | "evening" | "anytime";
 
 export interface TaskLike {
   recurrence_type: string;
@@ -19,4 +20,14 @@ export function isDueOn(task: TaskLike, d: Date): boolean {
   if (task.recurrence_type === "weekly") return task.recurrence_days.includes(d.getDay());
   if (task.recurrence_type === "once") return task.once_date === dateKey(d);
   return false;
+}
+
+/** Categorize a task's optional HH:MM[:SS] time into morning / afternoon / evening / anytime. */
+export function timeBucket(scheduledTime: string | null | undefined): TimeBucket {
+  if (!scheduledTime) return "anytime";
+  const hour = Number(scheduledTime.split(":")[0]);
+  if (Number.isNaN(hour)) return "anytime";
+  if (hour < 12) return "morning";
+  if (hour < 17) return "afternoon";
+  return "evening";
 }

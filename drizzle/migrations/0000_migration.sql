@@ -10,10 +10,11 @@ CREATE TABLE public.tasks (
   sort_order INT NOT NULL DEFAULT 0,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
-GRANT SELECT, INSERT, UPDATE, DELETE ON public.tasks TO anon, authenticated;
+GRANT SELECT ON public.tasks TO anon, authenticated;
 GRANT ALL ON public.tasks TO service_role;
 ALTER TABLE public.tasks ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "household access tasks" ON public.tasks FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "view current tasks" ON public.tasks FOR SELECT TO anon, authenticated
+  USING (recurrence_type <> 'once' OR once_date >= CURRENT_DATE - 1);
 
 CREATE TABLE public.task_logs (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -23,10 +24,16 @@ CREATE TABLE public.task_logs (
   completed_at TIMESTAMPTZ,
   UNIQUE(task_id, log_date)
 );
-GRANT SELECT, INSERT, UPDATE, DELETE ON public.task_logs TO anon, authenticated;
+GRANT SELECT, INSERT, UPDATE ON public.task_logs TO anon, authenticated;
 GRANT ALL ON public.task_logs TO service_role;
 ALTER TABLE public.task_logs ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "household access logs" ON public.task_logs FOR ALL TO anon, authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "view recent logs" ON public.task_logs FOR SELECT TO anon, authenticated
+  USING (log_date >= CURRENT_DATE - 7 AND log_date <= CURRENT_DATE + 7);
+CREATE POLICY "tick recent tasks" ON public.task_logs FOR INSERT TO anon, authenticated
+  WITH CHECK (log_date BETWEEN current_date - 1 AND current_date + 1);
+CREATE POLICY "untick recent tasks" ON public.task_logs FOR UPDATE TO anon, authenticated
+  USING (log_date BETWEEN current_date - 1 AND current_date + 1)
+  WITH CHECK (log_date BETWEEN current_date - 1 AND current_date + 1);
 
 ALTER TABLE public.tasks REPLICA IDENTITY FULL;
 ALTER TABLE public.task_logs REPLICA IDENTITY FULL;

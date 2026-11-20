@@ -14,8 +14,9 @@ type Out = { ok: true; title: Record<string, string>; description: Record<string
 export const autoTranslate = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => input.parse(d))
   .handler(async ({ data }): Promise<Out> => {
-    const expected = process.env["ADMIN_PIN"] || "8427";
-    if (data.pin !== expected) return { ok: false, error: "pin" };
+    const { verifyAdminPin } = await import("./auth.server");
+    const check = verifyAdminPin(data.pin);
+    if (!check.ok) return { ok: false, error: check.locked ? "rate_limited" : "pin" };
     const key = process.env["LOVABLE_API_KEY"];
     if (!key) return { ok: false, error: "config" };
 

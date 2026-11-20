@@ -2,12 +2,9 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { LANG_CODES } from "./locales";
 
-function pinOk(pin: string) {
-  const expected = process.env["ADMIN_PIN"] || "8427";
-  return pin.length === expected.length && pin === expected;
-}
-
-const textMap = z.record(z.string(), z.string().max(500)).refine((m) => Object.keys(m).every((k) => (LANG_CODES as string[]).includes(k)));
+const textMap = z
+  .record(z.string(), z.string().max(500))
+  .refine((m) => Object.keys(m).every((k) => (LANG_CODES as string[]).includes(k)));
 
 const taskFields = z.object({
   emoji: z.string().min(1).max(16),
@@ -34,8 +31,17 @@ const input = z.discriminatedUnion("action", [
 export const adminAction = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => input.parse(d))
   .handler(async ({ data }) => {
-    if (!pinOk(data.pin)) return { ok: false as const, tasks: [] };
+    const { verifyAdminPin } = await import("./auth.server");
+    const check = verifyAdminPin(data.pin);
+    if (!check.ok) {
+      return {
+        ok: false as const,
+        error: check.locked ? ("rate_limited" as const) : ("pin" as const),
+        tasks: [],
+      };
+    }
     if (data.action === "verify") return { ok: true as const, tasks: [] };
+
     const { supabaseAdmin: db } = await import("@/integrations/supabase/client.server");
     if (data.action === "list") {
       const { data: rows } = await db.from("tasks").select("*").order("sort_order").order("scheduled_time");

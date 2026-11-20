@@ -52,6 +52,7 @@
 }
 
 :root {
+  color-scheme: light;
   --radius: 1rem;
   --background: oklch(0.965 0.02 85);
   --foreground: oklch(0.25 0.03 160);
@@ -93,6 +94,43 @@
   --shadow-card: 0 2px 0 oklch(0.85 0.03 85), 0 8px 24px -12px oklch(0.38 0.07 160 / 0.25);
 }
 
+.dark {
+  color-scheme: dark;
+  --background: oklch(0.17 0.025 160);
+  --foreground: oklch(0.95 0.015 85);
+  --card: oklch(0.23 0.03 160);
+  --card-foreground: oklch(0.95 0.015 85);
+  --popover: oklch(0.23 0.03 160);
+  --popover-foreground: oklch(0.95 0.015 85);
+  --primary: oklch(0.56 0.1 160);
+  --primary-foreground: oklch(0.14 0.025 160);
+  --secondary: oklch(0.29 0.035 160);
+  --secondary-foreground: oklch(0.93 0.015 85);
+  --muted: oklch(0.27 0.028 160);
+  --muted-foreground: oklch(0.74 0.025 150);
+  --accent: oklch(0.7 0.15 40);
+  --accent-foreground: oklch(0.15 0.02 40);
+  --success: oklch(0.65 0.14 155);
+  --success-foreground: oklch(0.14 0.025 155);
+  --destructive: oklch(0.64 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.33 0.035 160);
+  --input: oklch(0.33 0.035 160);
+  --ring: oklch(0.6 0.1 160);
+  --kiosk: oklch(0.14 0.025 160);
+  --kiosk-card: oklch(0.22 0.035 160);
+  --kiosk-foreground: oklch(0.97 0.015 85);
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--secondary);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+  --shadow-card: 0 2px 0 oklch(0.12 0.02 160), 0 8px 24px -12px oklch(0 0 0 / 0.55);
+}
+
 @utility shadow-card {
   box-shadow: var(--shadow-card);
 }
@@ -111,5 +149,41 @@
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Complex script typography & vertical rhythm adaptations */
+  :root[lang="ar"], [dir="rtl"][lang="ar"] {
+    font-family: "Baloo Bhaijaan 2", "Noto Sans Arabic", system-ui, sans-serif;
+    line-height: 1.6;
+  }
+
+  :root[lang="ur"], [dir="rtl"][lang="ur"] {
+    font-family: "Noto Nastaliq Urdu", "Baloo Bhaijaan 2", system-ui, serif;
+    line-height: 2.0;
+  }
+
+  :root[lang="hi"], :root[lang="ne"] {
+    font-family: "Baloo 2", system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  :root[lang="bn"] {
+    font-family: "Baloo Da 2", system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  :root[lang="si"] {
+    font-family: "Noto Sans Sinhala", system-ui, sans-serif;
+    line-height: 1.6;
+  }
+
+  :root[lang="ta"] {
+    font-family: "Baloo Thambi 2", system-ui, sans-serif;
+    line-height: 1.55;
+  }
+
+  :root[lang="fil"], :root[lang="en"] {
+    font-family: "Baloo Bhaijaan 2", system-ui, sans-serif;
+    line-height: 1.45;
   }
 }

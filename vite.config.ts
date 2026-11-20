@@ -17,6 +17,7 @@ export default defineConfig({
         strategies: "generateSW",
         registerType: "autoUpdate",
         injectRegister: null,
+        outDir: ".output/public",
         filename: "sw.js",
         manifest: false,
         devOptions: { enabled: false },
@@ -29,6 +30,14 @@ export default defineConfig({
                 request.mode === "navigate" && !url.pathname.startsWith("/~oauth"),
               handler: "NetworkFirst",
               options: { cacheName: "pages", networkTimeoutSeconds: 4 },
+            },
+            {
+              urlPattern: /^https:\/\/fonts\.(?:googleapis|gstatic)\.com\/.*/i,
+              handler: "CacheFirst",
+              options: {
+                cacheName: "google-fonts",
+                expiration: { maxEntries: 30, maxAgeSeconds: 60 * 60 * 24 * 365 },
+              },
             },
           ],
         },

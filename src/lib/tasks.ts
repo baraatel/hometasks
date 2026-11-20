@@ -13,6 +13,7 @@ export function useHousehold(date: Date) {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [logs, setLogs] = useState<Record<string, boolean>>({});
   const [loading, setLoading] = useState(true);
+  const [toggleError, setToggleError] = useState(false);
 
   const load = useCallback(async () => {
     const [{ data: t }, { data: l }] = await Promise.all([
@@ -45,16 +46,27 @@ export function useHousehold(date: Date) {
   }, [load, key]);
 
   const toggle = async (taskId: string) => {
-    const next = !logs[taskId];
+    const prev = !!logs[taskId];
+    const next = !prev;
+    setToggleError(false);
     setLogs((s) => ({ ...s, [taskId]: next }));
-    if (navigator.vibrate) navigator.vibrate(next ? 30 : 10);
-    await supabase.from("task_logs").upsert(
-      { task_id: taskId, log_date: key, is_completed: next, completed_at: next ? new Date().toISOString() : null },
-      { onConflict: "task_id,log_date" },
-    );
+    if (typeof navigator !== "undefined" && navigator.vibrate) navigator.vibrate(next ? 30 : 10);
+    try {
+      const { error } = await supabase.from("task_logs").upsert(
+        { task_id: taskId, log_date: key, is_completed: next, completed_at: next ? new Date().toISOString() : null },
+        { onConflict: "task_id,log_date" },
+      );
+      if (error) {
+        setLogs((s) => ({ ...s, [taskId]: prev }));
+        setToggleError(true);
+      }
+    } catch {
+      setLogs((s) => ({ ...s, [taskId]: prev }));
+      setToggleError(true);
+    }
   };
 
-  return { tasks, logs, loading, toggle, reload: load };
+  return { tasks, logs, loading, toggle, toggleError, clearToggleError: () => setToggleError(false), reload: load };
 }
 
 /** Re-render at local midnight so the daily list resets automatically. */
@@ -78,7 +90,9 @@ export function taskDescription(t: Task, lang: Lang) {
 
 export function fmtTime(time: string | null, lang: Lang) {
   if (!time) return null;
-  const [h, m] = time.split(":").map(Number);
+  const parts = time.split(":").map(Number);
+  const h = parts[0] ?? 0;
+  const m = parts[1] ?? 0;
   const d = new Date(2000, 0, 1, h, m);
   return d.toLocaleTimeString(langMeta(lang).intl, { hour: "numeric", minute: "2-digit" });
 }

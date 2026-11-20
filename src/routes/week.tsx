@@ -19,7 +19,7 @@ export const Route = createFileRoute("/week")({
 
 function Week() {
   const now = useToday();
-  const { t, lang } = useI18n();
+  const { t, lang, locale } = useI18n();
   const { tasks } = useHousehold(now);
   const days = Array.from({ length: 7 }, (_, i) => {
     const d = new Date(now); d.setDate(now.getDate() + i); return d;
@@ -35,7 +35,7 @@ function Week() {
             <div key={dateKey(d)} className={cn("rounded-2xl bg-card p-4 shadow-card", isToday && "ring-2 ring-primary")}>
               <div className="flex items-baseline justify-between">
                 <h2 className="text-lg font-bold">
-                  {t.dayNames[d.getDay()]} <span className="text-muted-foreground">{d.toLocaleDateString(lang === "ar" ? "ar" : "en", { day: "numeric", month: "short" })}</span>
+                  {t.dayNames[d.getDay()]} <span className="text-muted-foreground">{d.toLocaleDateString(locale, { day: "numeric", month: "short" })}</span>
                 </h2>
                 <span className="text-sm text-muted-foreground">{due.length} {t.tasksCount}</span>
               </div>
