@@ -30,7 +30,10 @@ export function verifyAdminPin(pin: string, clientKey = "global", now = Date.now
     return { ok: false, locked: true, retryAfterSec: Math.ceil((rec.lockedUntil - now) / 1000) };
   }
 
-  const expected = process.env["ADMIN_PIN"] || "8427";
+  const expected = process.env["ADMIN_PIN"]?.trim();
+  if (!expected) {
+    return { ok: false, locked: false };
+  }
   const matched = pin.length > 0 && timingSafeEqual(sha256(pin), sha256(expected));
 
   if (matched) {
